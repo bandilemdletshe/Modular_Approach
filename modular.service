@@ -1,0 +1,36 @@
+[Unit]
+Description=CAS_Display
+After=network.target
+
+[Service]
+# Add a 10-second delay before starting
+ExecStartPre=/bin/sleep 10
+
+# Use the Python executable from the virtual environment
+ExecStart=/home/paisa/Documents/Modular_Approach/myenv/bin/python /home/paisa/Documents/Modular_Approach/main.py
+
+# Set the working directory where the script resides
+WorkingDirectory=/home/paisa/Documents/Modular_Approach
+
+# Set necessary environment variables
+Environment="PATH=/home/paisa/Documents/Modular_Approach/myenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="VIRTUAL_ENV=/home/paisa/Documents/Modular_Approach/myenv"
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/paisa/.Xauthority"
+Environment="PULSE_RUNTIME_PATH=/run/user/1000/pulse"
+
+
+# Standard outputs for logs
+StandardOutput=inherit
+StandardError=inherit
+
+# Restart the service on failure
+Restart=on-failure
+RestartSec=10
+
+# Run the service as the 'nvidia' user
+User=paisa
+
+[Install]
+WantedBy=multi-user.target
+

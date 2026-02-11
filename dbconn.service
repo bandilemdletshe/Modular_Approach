@@ -1,0 +1,21 @@
+[Unit]
+Description=Database connection
+After=network.target
+
+[Service]
+ExecStart=/home/paisa/Documents/Modular_Approach/myenv/bin/python /home/paisa/Documents/Modular_Approach/dbconn.py
+WorkingDirectory=/home/paisa/Documents/Modular_Approach
+Environment="PATH=/home/paisa/Documents/Modular_Approach/myenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="VIRTUAL_ENV=/home/paisa/Documents/Modular_Approach/myenv"
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/paisa/.Xauthority"
+
+StandardOutput=journal
+StandardError=journal
+
+User=paisa
+Restart=no  # No need to restart, it will be triggered by the timer
+
+[Install]
+WantedBy=multi-user.target
+
